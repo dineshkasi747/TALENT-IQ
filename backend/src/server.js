@@ -2,11 +2,20 @@ import express from "express";
 import { ENV } from "./lib/env.js";
 import path from "path";
 import { ConnectDB } from "./lib/db.js";
+import cors from "cors";
+import {inngest , functions} from "./lib/inngest.js";
+import {serve} from "inngest/express";
+
 
 const app = express();
 const __dirname = path.resolve();
 
 console.log(ENV.NODE_ENV)
+
+app.use(express.json());
+app.use(cors({origin:ENV.CLIENT_URL,credentials:true}));
+app.use("/api/inngest",serve({client:inngest,functions}))
+
 
 app.get('/hello',(req,res)=>{
     res.status(200).json({message:"hii there"})
