@@ -8,6 +8,7 @@ import {serve} from "inngest/express";
 import { protectRoute } from "./middleware/protectRoute.js";
 import { clerkMiddleware } from '@clerk/express'
 import chatRoutes from "./routes/chatRoutes.js"
+import sessionRoutes from "./routes/sessionRoute.js"
 
 
 
@@ -26,6 +27,8 @@ app.use(clerkMiddleware())
 
 app.use("/api/inngest",serve({client:inngest,functions}))
 app.use("/api/chat",chatRoutes)
+app.use("/api/sessions",sessionRoutes)
+
 
 
 
