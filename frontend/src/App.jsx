@@ -1,34 +1,23 @@
 import { useState } from 'react'
 
-
-import { SignedIn, SignedOut, SignInButton, SignOutButton } from '@clerk/clerk-react'
+import { SignedIn, SignedOut, SignInButton, SignOutButton, useUser } from '@clerk/clerk-react'
 import { Toaster } from 'react-hot-toast'
+import { Navigate, Route, Routes } from 'react-router'
+import HomePage from './pages/HomePage.jsx'
+import DashBoardPage from './pages/DashBoardPage.jsx'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const {isSignedIn,isLoaded} = useUser()
+
+  if(!isLoaded) return null;
 
   return (
     <>
-      <h1>welcom to talent iq</h1>
+    <Routes>
+      <Route path="/" element={!isSignedIn? <HomePage/> : <Navigate to={"/dashboard"} />} />
+      <Route path="/dashboard" element={isSignedIn? <DashBoardPage/> : <Navigate to={"/"} />} />
+    </Routes>
 
-      
-      <SignedOut>
-        <SignInButton mode = "redirect">
-            <button>
-              get started
-            </button>
-        </SignInButton>
-
-
-      </SignedOut>
-
-      <SignedIn>
-        <SignOutButton>
-          
-        </SignOutButton>
-      </SignedIn>
-
-      <Toaster/>
     </>
   )
 }
