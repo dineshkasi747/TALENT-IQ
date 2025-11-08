@@ -3,7 +3,7 @@ import { Navigate, Route, Routes } from "react-router";
 import HomePage from "./pages/HomePage";
 
 import { Toaster } from "react-hot-toast";
-import DashboardPage from "./pages/DashboardPage";
+import DashboardPage from "./pages/DashBoardPage";
 import ProblemPage from "./pages/ProblemPage";
 import ProblemsPage from "./pages/ProblemsPage";
 // import SessionPage from "./pages/SessionPage";
