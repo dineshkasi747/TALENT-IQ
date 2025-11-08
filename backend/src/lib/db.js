@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import {ENV} from "./env.js";
 
-export const ConnectDB = async () => {
+export const connectDB = async () => {
     try {
         if(!ENV.DB_URL){
             throw new error("no db is found to connect")
