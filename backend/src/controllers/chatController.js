@@ -1,18 +1,16 @@
-import { clientChat } from "../lib/stream.js";
-
 export async function getStreamToken (req,res) {
     try {
-        const token =  clientChat.createToken(res.user.clerkId)
+        const token = clientChat.createToken(req.user.clerkId)
 
-        req.status(201).json({
+
+        res.status(200).json({ 
             token,
-            userName:res.user.name,
-            useImage:res.user.image.clerkId,
-            userId:res.user.clerkId
+            userName:req.user.name,
+            userImage:req.user.ProfileImage, // Assuming you changed this based on prior conversation
+            userId:req.user.clerkId
         })
     } catch (error) {
-        console.error("error occures",error)
-        res.status(500).json({mes:"internal server error"})
+        console.error("error in getStreamToken",error) // Improved error message
+        res.status(500).json({message:"internal server error"}) // Fixed response key
     }
-
 }

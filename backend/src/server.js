@@ -1,7 +1,7 @@
 import express from "express";
 import { ENV } from "./lib/env.js";
 import path from "path";
-import { ConnectDB } from "./lib/db.js";
+import { connectDB } from "./lib/db.js";
 import cors from "cors";
 import {inngest , functions} from "./lib/inngest.js";
 import {serve} from "inngest/express";
@@ -55,7 +55,7 @@ if(ENV.NODE_ENV=="production"){
 
 const startServer = async ()=>{
     try {
-        await ConnectDB();
+        await connectDB();
         app.listen(ENV.PORT,()=> console.log("port is running in ",ENV.PORT));
     } catch (error) {
         console.error("error starting server",error)
